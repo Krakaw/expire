@@ -24,7 +24,7 @@ class Expire extends EventEmitter {
         super();
         this.expireInterval = expireInterval;
         this.onExpire = onExpire;
-        this.manualStart = !!manualStart;
+        this.manualStart = manualStart;
         if (!this.manualStart) {
             this.start();
         }

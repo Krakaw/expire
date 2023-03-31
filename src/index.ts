@@ -17,7 +17,9 @@ class Expire extends EventEmitter {
     private readonly expireInterval: number;
     private readonly onExpire?: (lastHeartbeat?: Date) => void;
     private readonly manualStart: boolean | undefined;
+
     private timeout!: NodeJS.Timeout;
+    private started = false;
     constructor({ expireInterval, onExpire, manualStart }: ExpireOptions) {
         super();
         this.expireInterval = expireInterval;
@@ -28,7 +30,10 @@ class Expire extends EventEmitter {
         }
     }
 
-    public start() {
+    private initialize() {
+        if (!this.started) {
+            return;
+        }
         clearTimeout(this.timeout)
         this.timeout = setTimeout(() => {
             this.emit('expire', this.lastHeartbeat);
@@ -38,13 +43,19 @@ class Expire extends EventEmitter {
         }, this.expireInterval);
     }
 
+    public start() {
+        this.started = true;
+        this.initialize();
+    }
+
     public stop() {
+        this.started = false;
         clearTimeout(this.timeout)
     }
 
     public heartbeat() {
         this.lastHeartbeat = new Date();
-        this.start();
+        this.initialize();
     }
 }
 

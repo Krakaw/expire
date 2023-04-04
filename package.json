@@ -1,6 +1,6 @@
 {
   "name": "@krakaw/expire",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "types": "./lib/cjs/types/index.d.ts",
   "main": "./lib/cjs/index.js",
@@ -14,7 +14,6 @@
     "build:esm": "tsc -p ./tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "prepack": "npm run build",
-
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Krakaw",

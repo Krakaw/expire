@@ -23,3 +23,4 @@ declare class Expire extends EventEmitter {
     heartbeat(): void;
 }
 export default Expire;
+//# sourceMappingURL=index.d.ts.map

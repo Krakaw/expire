@@ -11,10 +11,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-
     "outDir": "lib",
-    "declaration": true
-
+    "declaration": true,
+    "checkJs": true,
+    "declarationMap": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"]
 }

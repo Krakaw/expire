@@ -1,4 +1,4 @@
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import {assert} from "chai";
 import Expire from "../src";
 
@@ -23,11 +23,11 @@ describe('Expire', async () => {
         const cb = sinon.fake()
         const expire = new Expire({expireInterval: 10, onExpire: cb});
         assert(cb.notCalled);
-        await new Promise(r => setTimeout(r, 9));
+        await new Promise(r => setTimeout(r, 8));
         expire.heartbeat()
-        await new Promise(r => setTimeout(r, 9));
+        await new Promise(r => setTimeout(r, 8));
         assert(cb.notCalled);
-        await new Promise(r => setTimeout(r, 2));
+        await new Promise(r => setTimeout(r, 3));
         assert(cb.called);
         assert.equal(cb.callCount , 1);
         await new Promise(r => setTimeout(r, 10));

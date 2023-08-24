@@ -1,9 +1,11 @@
 /// <reference types="node" />
 import { EventEmitter } from 'events';
+type Backoff = 'once' | 'repeat' | 'linear' | 'exponential';
 export interface ExpireOptions {
     expireInterval: number;
     onExpire?: (lastHeartbeat?: Date) => void;
     manualStart?: boolean;
+    backoff?: Backoff;
 }
 declare interface Expire {
     on(event: 'expire', listener: (lastHeartbeat?: Date) => void): this;
@@ -11,16 +13,20 @@ declare interface Expire {
 }
 declare class Expire extends EventEmitter {
     lastHeartbeat?: Date;
+    lastExpire?: Date;
     private readonly expireInterval;
     private readonly onExpire?;
     private readonly manualStart;
+    private readonly backoff;
     private timeout;
     private started;
-    constructor({ expireInterval, onExpire, manualStart }: ExpireOptions);
+    private backoffCount;
+    constructor({ expireInterval, onExpire, manualStart, backoff }: ExpireOptions);
     private initialize;
     start(): void;
     stop(): void;
     heartbeat(): void;
+    isStarted(): boolean;
 }
 export default Expire;
 //# sourceMappingURL=index.d.ts.map

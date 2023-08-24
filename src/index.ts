@@ -1,7 +1,7 @@
 import {EventEmitter} from 'events';
 import {clearTimeout} from "timers";
 
-type Backoff = 'once' | 'repeat' | 'linear' | 'exponential';
+export type Backoff = 'once' | 'repeat' | 'linear' | 'exponential';
 
 export interface ExpireOptions {
     expireInterval: number;

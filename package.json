@@ -14,12 +14,19 @@
     "build:esm": "tsc -p ./tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
     "build:cjs": "tsc -p ./tsconfig.cjs.json",
     "prepack": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require ts-node/register test/**/*.spec.ts"
   },
   "author": "Krakaw",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
     "@types/node": "^18.17.9",
+    "@types/sinon": "^10.0.16",
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "sinon": "^15.2.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
   "exports": {

@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { EventEmitter } from 'events';
-type Backoff = 'once' | 'repeat' | 'linear' | 'exponential';
+export type Backoff = 'once' | 'repeat' | 'linear' | 'exponential';
 export interface ExpireOptions {
     expireInterval: number;
     onExpire?: (lastHeartbeat?: Date) => void;

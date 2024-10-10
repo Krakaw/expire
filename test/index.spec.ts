@@ -1,11 +1,11 @@
 import * as sinon from 'sinon';
 import {assert} from "chai";
-import Expire from "../src";
+import Expirer from "../src";
 
-describe('Expire', async () => {
+describe('Expirer', async () => {
     it('should expire once after a set amount of time has elapsed automatically', async () => {
         const cb = sinon.fake()
-        const expire = new Expire({expireInterval: 10, onExpire: cb});
+        const expire = new Expirer({expireInterval: 10, onExpire: cb});
         assert(cb.notCalled);
         await new Promise(r => setTimeout(r, 10));
         assert(cb.called);
@@ -21,7 +21,7 @@ describe('Expire', async () => {
 
     it('should not expire after a heartbeat', async () => {
         const cb = sinon.fake()
-        const expire = new Expire({expireInterval: 10, onExpire: cb});
+        const expire = new Expirer({expireInterval: 10, onExpire: cb});
         assert(cb.notCalled);
         await new Promise(r => setTimeout(r, 8));
         expire.heartbeat()
@@ -36,7 +36,7 @@ describe('Expire', async () => {
 
     it('should expire every interval', async () => {
         const cb = sinon.fake()
-        const expire = new Expire({expireInterval: 10, onExpire: cb, backoff: 'repeat'});
+        const expire = new Expirer({expireInterval: 10, onExpire: cb, backoff: 'repeat'});
         assert(cb.notCalled);
         await new Promise(r => setTimeout(r, 10));
         assert(cb.called);
@@ -51,7 +51,7 @@ describe('Expire', async () => {
 
     it('should backoff linearly with manual start', async () => {
         const cb = sinon.fake()
-        const expire = new Expire({expireInterval: 10, onExpire: cb, backoff: 'linear', manualStart: true});
+        const expire = new Expirer({expireInterval: 10, onExpire: cb, backoff: 'linear', manualStart: true});
         assert(expire.isStarted() === false)
         expire.start();
         assert(cb.notCalled);
@@ -69,7 +69,7 @@ describe('Expire', async () => {
 
     it('should backoff exponentially', async () => {
         const cb = sinon.fake()
-        const expire = new Expire({expireInterval: 10, onExpire: cb, backoff: 'exponential'});
+        const expire = new Expirer({expireInterval: 10, onExpire: cb, backoff: 'exponential'});
         assert(cb.notCalled);
         await new Promise(r => setTimeout(r, 10));
         assert(cb.called);

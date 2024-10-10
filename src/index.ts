@@ -10,13 +10,13 @@ export interface ExpireOptions {
     backoff?: Backoff;
 }
 
-declare interface Expire {
+declare interface Expirer {
     on(event: 'expire', listener: (lastHeartbeat?: Date) => void): this;
 
     emit(event: 'expire', lastHeartbeat?: Date): boolean;
 }
 
-class Expire extends EventEmitter {
+class Expirer extends EventEmitter {
     public lastHeartbeat?: Date;
     public lastExpire?: Date;
 
@@ -98,4 +98,4 @@ class Expire extends EventEmitter {
     }
 }
 
-export default Expire;
+export default Expirer;

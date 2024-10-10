@@ -7,11 +7,11 @@ export interface ExpireOptions {
     manualStart?: boolean;
     backoff?: Backoff;
 }
-declare interface Expire {
+declare interface Expirer {
     on(event: 'expire', listener: (lastHeartbeat?: Date) => void): this;
     emit(event: 'expire', lastHeartbeat?: Date): boolean;
 }
-declare class Expire extends EventEmitter {
+declare class Expirer extends EventEmitter {
     lastHeartbeat?: Date;
     lastExpire?: Date;
     private readonly expireInterval;
@@ -28,5 +28,5 @@ declare class Expire extends EventEmitter {
     heartbeat(): void;
     isStarted(): boolean;
 }
-export default Expire;
+export default Expirer;
 //# sourceMappingURL=index.d.ts.map

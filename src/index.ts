@@ -10,7 +10,7 @@ export interface ExpireOptions {
     backoff?: Backoff;
 }
 
-declare interface ExpireType {
+interface ExpireType {
     on(event: 'expire', listener: (lastHeartbeat?: Date) => void): this;
 
     emit(event: 'expire', lastHeartbeat?: Date): boolean;
